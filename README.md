@@ -1,1 +1,7 @@
-comp330-ass1-framework
+COMP330 Assignment 1 -- Helicopter Rescue
+
+Files:
+    index.html      Framework for HTML file, with canvas
+    style.css       Basic style sheet
+    js/game.js      Framework for JavaScript game
+    js/matrix.js    Matrix library
