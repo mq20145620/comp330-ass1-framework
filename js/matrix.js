@@ -2,7 +2,7 @@
 
 class Matrix {
 
-    // NOTE: matrices are written in homogeneous coordinates, in column order: [i0, i1, 0, j0, j1, j2, 0, P0, P1, 1]
+    // NOTE: matrices are written in homogeneous coordinates, in column order: [i0, i1, 0, j0, j1, j2, 0, T0, T1, 1]
 
     // Matrices are represented as Float32Arrays for ease of passing to GLSL
     // See: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array
@@ -21,14 +21,20 @@ class Matrix {
 
     // The identity matrix
     static identity() {
-        return new Float32Array([1, 0, 0, 0, 1, 0, 0, 0, 1]);
+        return new Float32Array([
+        //  i         j         T
+            1, 0, 0,  0, 1, 0,  0, 0, 1
+        ]);
     }
 
     // Translate by (dx,dy)
     static translation(dx, dy) {
         check(isNumber(dx, dy));
 
-        return new Float32Array([1, 0,  0, 0, 1, 0, dx, dy, 1]);
+        return new Float32Array([
+        //  i         j         T
+            1, 0, 0,  0, 1, 0,  dx, dy, 1
+        ]);
     }
 
     // Rotate by angle (in radians)
@@ -37,14 +43,20 @@ class Matrix {
 
         let s = Math.sin(angle);
         let c = Math.cos(angle);
-        return new Float32Array([c, s, 0, -s, c, 0, 0, 0, 1]);
+        return new Float32Array([
+        //  i         j         T
+            c, s, 0,  -s, c, 0,  0, 0, 1
+        ]);
     }
 
     // Scale axes by (sx,sy)
     static scale(sx, sy) {
         check(isNumber(sx, sy));
 
-        return new Float32Array([sx, 0, 0, 0, sy, 0, 0,  0, 1]);
+        return new Float32Array([
+        //  i         j         T
+            sx, 0, 0,  0, sy, 0,  0, 0, 1
+        ]);
     }
 
     // Multiply two matrices and return the result
@@ -63,8 +75,6 @@ class Matrix {
 
         return m;
     }
-
-
 
     // Multiply a vector by a matrix, and return the result
     static multiplyVector(m, v) {
