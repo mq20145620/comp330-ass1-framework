@@ -44,7 +44,6 @@ function createProgram(gl, vertexShader, fragmentShader) {
 }
 
 
-
 function main() {
 
     // === Initialisation ===
@@ -53,12 +52,12 @@ function main() {
     
     // === Per Frame operations ===
 
-    // ADD MORE CODE HERE    
-
     let update = function(deltaTime) {
+        // YOUR UPDATE FUNCTION
     };
 
     let render = function() {
+        // YOUR RENDER FUNCTION
     };
 
 }    
